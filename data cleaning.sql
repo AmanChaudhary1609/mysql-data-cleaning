@@ -266,4 +266,39 @@ FROM world_layoffs.layoffs_staging2;
 
 
 
+-- 3. Look at Null Values
 
+-- the null values in total_laid_off, percentage_laid_off, and funds_raised_millions all look normal. I don't think I want to change that
+-- I like having them null because it makes it easier for calculations during the EDA phase
+
+-- so there isn't anything I want to change with the null values
+
+
+
+
+-- 4. remove any columns and rows we need to
+
+SELECT *
+FROM world_layoffs.layoffs_staging2
+WHERE total_laid_off IS NULL;
+
+
+SELECT *
+FROM world_layoffs.layoffs_staging2
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+-- Delete Useless data we can't really use
+DELETE FROM world_layoffs.layoffs_staging2
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+SELECT * 
+FROM world_layoffs.layoffs_staging2;
+
+ALTER TABLE layoffs_staging2
+DROP COLUMN row_num;
+
+
+SELECT * 
+FROM world_layoffs.layoffs_staging2;
